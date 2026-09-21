@@ -29,6 +29,10 @@ class Calculator {
       _calculate();
       return;
     }
+    if (key == 'x²') {
+      _square();
+      return;
+    }
     if (key == 'DEL') {
       _evaluated = false;
       _result = null;
@@ -121,6 +125,34 @@ class Calculator {
       _evaluated = true;
     } on Object {
       error = 'Unable to calculate. Check the expression or press C.';
+    }
+  }
+
+  void _square() {
+    if (_evaluated) {
+      _tokens
+        ..clear()
+        ..add(_result!);
+      _evaluated = false;
+      _result = null;
+    }
+    if (_tokens.isEmpty || _isOperator(_tokens.last)) {
+      error = 'Enter a number first.';
+      return;
+    }
+    try {
+      final value = double.parse(_tokens.last);
+      final squared = value * value;
+      if (!squared.isFinite) {
+        error = 'Result is too large. Try a smaller number.';
+        return;
+      }
+      final rounded = double.parse(squared.toStringAsPrecision(12));
+      _tokens[_tokens.length - 1] = rounded == 0
+          ? '0'
+          : rounded.toString().replaceFirst(RegExp(r'\.0$'), '');
+    } on Object {
+      error = 'Unable to square this number.';
     }
   }
 }

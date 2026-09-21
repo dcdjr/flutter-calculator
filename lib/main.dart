@@ -157,7 +157,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       ),
                     ),
                   ),
-                  _row(['C', 'DEL', '/']),
+                  _row(['C', 'DEL', 'x²', '/']),
                   _row(['7', '8', '9', '*']),
                   _row(['4', '5', '6', '-']),
                   _row(['1', '2', '3', '+']),
@@ -202,6 +202,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     const labels = {
       'C': 'Clear',
       'DEL': 'Delete last character',
+      'x²': 'Square',
       '/': 'Divide',
       '*': 'Multiply',
       '-': 'Subtract',
